@@ -12,13 +12,13 @@ const Header = () => {
                 color: isActive ? "#FFF" : "",
             }
         }}>Home</NavLink></li>
-        <li><NavLink to='/z' style={({isActive}) => {
+        <li><NavLink to='/addProduct' style={({isActive}) => {
             return{
                 backgroundColor: isActive ? "#E1AA74" : "",
                 color: isActive ? "#FFF" : "",
             }
         }}>Add Product</NavLink></li>
-        <li><NavLink to='/y' style={({isActive}) => {
+        <li><NavLink to='/products' style={({isActive}) => {
             return{
                 backgroundColor: isActive ? "#E1AA74" : "",
                 color: isActive ? "#FFF" : "",
@@ -26,22 +26,22 @@ const Header = () => {
         }}>Products</NavLink></li>
     </>
     return (
-        <div className="font-noto">
-            <div className="navbar">
-                <div className="navbar-start">
-                    <Link className="text-3xl font-tavi font-bold text-[#3876BF]">Fuision<span className="text-[#E1AA74]">Electro</span>Hub</Link>
+        <div className="font-noto z-30">
+            <div className="flex flex-col md:lg:flex-col lg:flex-row justify-between items-center py-4 px-4 s">
+                <div className="">
+                    <Link className="lg:text-3xl md:text-2xl text-xl font-tavi font-bold text-[#3876BF]">Fuision<span className="text-[#E1AA74]">Electro</span>Hub</Link>
                 </div>
-                <div className="navbar-center">
+                <div className="py-3 lg:py-0 md:py-3">
                     <div className="form-control">
                         <div className="input-group">
-                            <input type="text" placeholder="Search…" className="input input-bordered" />
+                            <input type="text" placeholder="Search…" className="input input-bordered lg:w-96 md:w-96 w-60" />
                             <button className="btn btn-square bg-[#E1AA74] text-[#FFF] font-bold">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div className="navbar-end flex items-center space-x-4 ">
+                <div className="flex items-center space-x-4 ">
                     {
                         user == true && <button className="btn flex gap-2 items-center rounded-lg capitalize">
                             <span>My Cart</span><FaShoppingCart></FaShoppingCart>
@@ -60,17 +60,17 @@ const Header = () => {
                             </div>
                         </div>
                             :
-                            <Link><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-lg text-[#FFF]">Login</button></Link>
+                            <Link to='/signIn'><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-lg text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">SignIn</button></Link>
                     }
                 </div>
             </div>
-            <div className="navbar bg-[#3876BF] text-[#F3F0CA]">
+            <div className="navbar bg-[#3876BF] text-[#58573c]">
                 <div className="navbar-start lg:hidden">
-                    <div className="dropdown">
+                    <div className="dropdown z-30">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52  space-y-3">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#3876BF] rounded-box w-52  space-y-3 text-lg text-[#FFF] font-bold">
                             {links}
                         </ul>
                     </div>

@@ -29,7 +29,7 @@ const Header = () => {
         <div className="font-noto z-30">
             <div className="flex flex-col md:lg:flex-col lg:flex-row justify-between items-center py-4 px-4 s">
                 <div className="">
-                    <Link className="lg:text-3xl md:text-2xl text-xl font-tavi font-bold text-[#3876BF]">Fuision<span className="text-[#E1AA74]">Electro</span>Hub</Link>
+                    <Link className="lg:text-2xl md:text-2xl text-xl font-tavi font-bold text-[#3876BF]">Fuision<span className="text-[#E1AA74]">Electro</span>Hub</Link>
                 </div>
                 <div className="py-3 lg:py-0 md:py-3">
                     <div className="form-control">
@@ -60,22 +60,22 @@ const Header = () => {
                             </div>
                         </div>
                             :
-                            <Link to='/signIn'><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-lg text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">SignIn</button></Link>
+                            <Link to='/signIn'><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">SignIn</button></Link>
                     }
                 </div>
             </div>
-            <div className="navbar bg-[#3876BF] text-[#58573c]">
+            <div className="navbar bg-[#3876BF] text-[#58573c] text-md">
                 <div className="navbar-start lg:hidden">
                     <div className="dropdown z-30">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#3876BF] rounded-box w-52  space-y-3 text-lg text-[#FFF] font-bold">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow-lg bg-[#3876BF] rounded-box w-52  space-y-3 text-md text-[#FFF] font-bold">
                             {links}
                         </ul>
                     </div>
                 </div>
-                <div className="lg:navbar-start md:navbar-start hidden lg:flex">
+                <div className="lg:navbar-start md:navbar-start hidden lg:flex text-md">
                     <ul className="menu menu-horizontal px-1 space-x-3 text-lg text-[#F3F0CA] font-bold">
                         {links}
                     </ul>

@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const AddProducts = () => {
-    const handleAddProduct = (e) =>{
+    const navigate = useNavigate()
+    const handleAddProduct = (e) => {
         e.preventDefault()
         console.log("Clicked")
 
+        const form = e.target
         const image = e.target.image.value
         const name = e.target.name.value
         const brandNameUp = e.target.brandName.value
@@ -11,15 +16,30 @@ const AddProducts = () => {
         const shortDescription = e.target.shortDescription.value
         const rating = e.target.rating.value
 
-        const brandName =brandNameUp.toLowerCase()
-        const addProduct = {image,name,brandName,type,price,shortDescription,rating}
+        const brandName = brandNameUp.toLowerCase()
+        const addProduct = { image, name, brandName, type, price, shortDescription, rating }
         console.log(addProduct)
 
-        fetch("https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products",{
+        fetch("https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products", {
             method: "POST",
-            headers: {"content-type" : "application/json"},
+            headers: { "content-type": "application/json" },
             body: JSON.stringify(addProduct)
         })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: true,
+                        timer: 1500
+                    })
+                    form.reset()
+                    navigate('/')
+                }
+            })
     }
     return (
         <div className="md:max-w-4xl lg:max-w-5xl mx-auto my-4 p-6">
@@ -50,7 +70,6 @@ const AddProducts = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Type</span>
                         </label>
-                        {/* <input type="text" name="type" placeholder="Enter product type" className="input input-bordered" required /> */}
                         <select name="type" id="" className="input input-bordered text-gray-400" required>
                             <option value="">Select one type</option>
                             <option value="Mobile">Mobile</option>
@@ -62,7 +81,7 @@ const AddProducts = () => {
                         </select>
                     </div>
                 </div>
-                <div className="flex lg:flex-row md:flex-col flex-col gap-4 items-center font-Montserrat">
+                <div className="flex lg:flex-row md:flex-col flex-col gap-4 font-Montserrat">
                     <div className="form-control w-full md:w-1/2 lg:w-1/2">
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Price</span>
@@ -73,8 +92,7 @@ const AddProducts = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Short Description</span>
                         </label>
-                        {/* <input type="text" name="shortDescription" placeholder="Enter product short description" className="input input-bordered" required /> */}
-                        <textarea placeholder="Bio" name="shortDescription"  className="textarea textarea-bordered textarea-lg w-full max-w-xs" ></textarea>
+                        <textarea placeholder="Bio" name="shortDescription" className="textarea textarea-bordered textarea-lg w-full max-w-lg" ></textarea>
                     </div>
                 </div>
                 <div className="flex flex-col  gap-4 items-center font-Montserrat">
@@ -82,7 +100,6 @@ const AddProducts = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Rating</span>
                         </label>
-                        {/* <input type="text" name="rating" placeholder="Enter product rating" className="input input-bordered" required /> */}
                         <select name="rating" id="" className="input input-bordered text-gray-400" required>
                             <option value="">Select a rating number</option>
                             <option value="1">1</option>

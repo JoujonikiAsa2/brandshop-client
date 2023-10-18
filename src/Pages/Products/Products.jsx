@@ -1,4 +1,9 @@
 import { useLoaderData, useParams } from "react-router-dom";
+// import Product from "../../components/Product/Product";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { FreeMode, Pagination } from 'swiper/modules';
 import Product from "../../components/Product/Product";
 
 const Products = () => {
@@ -11,18 +16,33 @@ const Products = () => {
                 {
                     products.length > 0
                         ?
-                        <div>
-                            <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12">Products</h2>
+                        <div className="my-20">
+                            {/* <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12">Products</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-4">
                                 {
                                     products.map(product => <Product key={product._id} product={product}></Product>)
                                 }
-                            </div>
+                            </div> */}
+                            <Swiper
+                                slidesPerView={3}
+                                spaceBetween={30}
+                                freeMode={true}
+                                pagination={{
+                                    clickable: true,
+                                }}
+                                modules={[FreeMode, Pagination]}
+                                className="mySwiper"
+                            >
+
+                                {
+                                    products.map(product => <SwiperSlide key={product._id}><Product  product={product}></Product></SwiperSlide>)
+                                }
+                            </Swiper>
                         </div>
                         :
                         <div>
                             <div className="">
-                               <h2 className="flex justify-center items-center text-3xl font-bold text-[#3876BF] py-12 h-[20rem]">No Product found</h2>
+                                <h2 className="flex justify-center items-center text-3xl font-bold text-[#3876BF] py-12 h-[20rem]">No Product found</h2>
                             </div>
                         </div>
 

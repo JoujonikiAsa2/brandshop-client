@@ -76,7 +76,7 @@ const HomePage = () => {
                 </Swiper>
             </div>
             <div>
-                <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12">Category</h2>
+                <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12 drop-shadow-2xl drop-shadow-black">Category</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {
                         categories.map(product => <Category key={product.brandName} product={product}></Category>)

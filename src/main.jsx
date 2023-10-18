@@ -20,7 +20,8 @@ import Login from './components/Login/Login';
     children:[
       {
         path: '/',
-        element: <HomePage></HomePage>
+        element: <HomePage></HomePage>,
+        loader: ()=>fetch('http://localhost:5000/products')
       },
       {
         path: '/signIn',
@@ -36,7 +37,13 @@ import Login from './components/Login/Login';
       },
       {
         path: '/products',
-        element: <Products></Products>
+        element: <Products></Products>,
+        loader: ()=>fetch("http://localhost:5000/products")
+      },
+      {
+        path: '/products/:brandName',
+        element: <Products></Products>,
+        loader: ({params})=>fetch(`http://localhost:5000/products/${params.brandName}`)
       },
     ]
   },
@@ -46,4 +53,3 @@ import Login from './components/Login/Login';
     <RouterProvider router={router} />
   </React.StrictMode>
  );
- 

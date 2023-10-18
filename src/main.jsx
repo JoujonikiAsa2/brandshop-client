@@ -21,7 +21,7 @@ import Login from './components/Login/Login';
       {
         path: '/',
         element: <HomePage></HomePage>,
-        loader: ()=>fetch('http://localhost:5000/products')
+        loader: ()=>fetch('https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products')
       },
       {
         path: '/signIn',
@@ -38,12 +38,12 @@ import Login from './components/Login/Login';
       {
         path: '/products',
         element: <Products></Products>,
-        loader: ()=>fetch("http://localhost:5000/products")
+        loader: ()=>fetch("https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products")
       },
       {
         path: '/products/:brandName',
         element: <Products></Products>,
-        loader: ({params})=>fetch(`http://localhost:5000/products/${params.brandName}`)
+        loader: ({params})=>fetch(`https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products/${params.brandName}`)
       },
     ]
   },

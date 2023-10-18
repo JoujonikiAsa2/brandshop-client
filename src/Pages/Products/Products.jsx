@@ -1,19 +1,10 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import Product from "../../components/Product/Product";
-// import { useEffect, useState } from "react";
-// import Category from "../../components/Category/Category";
-// import Swal from "sweetalert2";
 
 const Products = () => {
     const products = useLoaderData()
     const id = useParams()
     console.log(id)
-    // const [products, setAllProducts] = useState([])
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/products')
-    //         .then(res => res.json())
-    //         .then(data => setAllProducts(data))
-    // }, [])
     return (
         <div>
             <div>

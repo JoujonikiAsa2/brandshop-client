@@ -15,7 +15,7 @@ const AddProducts = () => {
         const addProduct = {image,name,brandName,type,price,shortDescription,rating}
         console.log(addProduct)
 
-        fetch("http://localhost:5000/products",{
+        fetch("https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products",{
             method: "POST",
             headers: {"content-type" : "application/json"},
             body: JSON.stringify(addProduct)
@@ -73,7 +73,8 @@ const AddProducts = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Short Description</span>
                         </label>
-                        <input type="text" name="shortDescription" placeholder="Enter product short description" className="input input-bordered" required />
+                        {/* <input type="text" name="shortDescription" placeholder="Enter product short description" className="input input-bordered" required /> */}
+                        <textarea placeholder="Bio" name="shortDescription"  className="textarea textarea-bordered textarea-lg w-full max-w-xs" ></textarea>
                     </div>
                 </div>
                 <div className="flex flex-col  gap-4 items-center font-Montserrat">

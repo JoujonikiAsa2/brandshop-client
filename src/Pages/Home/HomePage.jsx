@@ -17,7 +17,7 @@ const HomePage = () => {
     const [categories,setCategories] = useState([])
 
     useEffect(()=>{
-        fetch('https://fusion-electro-hub-server-side-c1cf28vcd.vercel.app/categories')
+        fetch('https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/categories')
         .then(res=>res.json())
         .then(data=>setCategories(data))
     },[])

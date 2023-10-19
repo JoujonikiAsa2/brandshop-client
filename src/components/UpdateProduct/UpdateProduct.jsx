@@ -22,7 +22,7 @@ const UpdateProduct = () => {
         const UpdateProduct = { image, name, brandName, type, price, shortDescription, rating }
         console.log(UpdateProduct)
 
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products/${product._id}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(UpdateProduct)

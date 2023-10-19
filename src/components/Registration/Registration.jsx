@@ -1,15 +1,42 @@
-import { FaGoogle } from 'react-icons/fa';
 import { BsFillImageFill, BsFillPersonFill } from 'react-icons/bs'
 import { AiTwotoneMail } from 'react-icons/ai'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import signUp from '../../assets/photos/Athentication/2.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
+import { updateProfile } from 'firebase/auth';
 
 const Registration = () => {
+    const navigate = useNavigate()
+    const { createUser } = useContext(AuthContext)
+    const handleSignUp = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const image = form.image.value
+        const name = form.name.value
+        const email = form.email.value
+        const password = form.password.value
+
+        console.log(image, name, email, password)
+        createUser(email,password)
+        .then(res => {
+            console.log(res.user)
+            Swal.fire('Registration Successfull!')
+            navigate('/signIn')
+            updateProfile(res.user,{
+                displayName: name,
+                photoURL: image
+            })
+        }
+        )
+        .catch(error => console.log(error.message))
+    }
     return (
         <div className='md:max-w-4xl lg:max-w-5xl mx-auto shadow-lg m-5 lg:m-20 md:m-16'> <h1 className="text-center text-2xl font-bold pt-8 text-[#3876BF]">SignUp</h1>
             <div className=" flex flex-col-reverse md:flex-row-reverse lg:flex-row-reverse justify-center items-center">
-                <form className="space-y-4 py-4">
+                <form className="space-y-4 py-4" onSubmit={handleSignUp}>
                     <div className="flex-col  gap-4  items-center font-Montserrat">
                         <div className="flex items-center gap-6 w-full border-b-2">
                             <label className="">
@@ -40,7 +67,7 @@ const Registration = () => {
                             <label className="">
                                 <span className="font-medium font-tavi text-xs">I agree all statement in Terms of ervice</span>
                             </label>
-                            
+
                         </div>
                     </div>
                     <div className="flex flex-col  gap-4 items-center font-Montserrat">
@@ -52,7 +79,7 @@ const Registration = () => {
                         </div>
                     </div>
                     <div>
-                        <Link className='underline'>Allready have an account? Login</Link>
+                        <Link to='/signIn' className='underline'>Allready have an account? Login</Link>
                     </div>
                 </form>
                 <div>

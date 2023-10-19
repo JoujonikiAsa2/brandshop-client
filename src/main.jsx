@@ -4,24 +4,27 @@ import Root from './components/Layout/Root'
 import {
   createBrowserRouter,
   RouterProvider,
- } from "react-router-dom";
- import "./index.css";
+} from "react-router-dom";
+import "./index.css";
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import HomePage from './Pages/Home/HomePage';
 import Products from './Pages/Products/Products';
 import AddProducts from './Pages/AddProducts/AddProducts';
 import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
- const router = createBrowserRouter([
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import AuthProvider from './AuthProvider/AuthProvider';
+import UpdateProduct from './components/UpdateProduct/UpdateProduct';
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    errorElement:<ErrorPage></ErrorPage>,
-    children:[
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
       {
         path: '/',
         element: <HomePage></HomePage>,
-        loader: ()=>fetch('https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products')
+        loader: () => fetch('https://fusion-electro-hub-server-side-c1cf28vcd.vercel.app/products')
       },
       {
         path: '/signIn',
@@ -33,23 +36,30 @@ import Login from './components/Login/Login';
       },
       {
         path: '/addProduct',
-        element: <AddProducts></AddProducts>
+        element: <PrivateRoute><AddProducts></AddProducts></PrivateRoute>
       },
       {
         path: '/products',
-        element: <Products></Products>,
-        loader: ()=>fetch("https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products")
+        element: <PrivateRoute><Products></Products></PrivateRoute>,
+        loader: () => fetch("https://fusion-electro-hub-server-side-c1cf28vcd.vercel.app/products")
+      },
+      {
+        path: '/update/:id',
+        element: <UpdateProduct></UpdateProduct>,
+        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
       },
       {
         path: '/products/:brandName',
         element: <Products></Products>,
-        loader: ({params})=>fetch(`https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/products/${params.brandName}`)
+        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side-c1cf28vcd.vercel.app/products/${params.brandName}`)
       },
     ]
   },
- ]);
- ReactDOM.createRoot(document.getElementById("root")).render(
+]);
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+        <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
- );
+);

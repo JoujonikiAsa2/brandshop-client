@@ -10,7 +10,6 @@ import { useLoaderData } from "react-router-dom";
 import Product from "../../components/Product/Product";
 import Category from "../../components/Category/Category";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
 const HomePage = () => {
     const products = useLoaderData()
@@ -18,7 +17,7 @@ const HomePage = () => {
     const [categories,setCategories] = useState([])
 
     useEffect(()=>{
-        fetch('https://fusion-electro-hub-server-side-qxsynaf6m.vercel.app/categories')
+        fetch('https://fusion-electro-hub-server-side-c1cf28vcd.vercel.app/categories')
         .then(res=>res.json())
         .then(data=>setCategories(data))
     },[])
@@ -76,7 +75,7 @@ const HomePage = () => {
                 </Swiper>
             </div>
             <div>
-                <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12 drop-shadow-2xl drop-shadow-black">Category</h2>
+                <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12 drop-shadow-2xl drop-shadow-black" >Category</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {
                         categories.map(product => <Category key={product.brandName} product={product}></Category>)
@@ -87,7 +86,7 @@ const HomePage = () => {
                 <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12">Products</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-4">
                     {
-                        products ? products.map(product => <Product key={product._id} product={product}  rating={productRat} setRating={setProductRat}></Product>) : Swal.fire('SweetAlert2 is working!')
+                        products && products.map(product => <Product key={product._id} product={product}  rating={productRat} setRating={setProductRat}></Product>)
                     }
                 </div>
             </div>

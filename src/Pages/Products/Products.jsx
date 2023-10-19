@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 import Product from "../../components/Product/Product";
+import Advertise from "../../components/Advertise/Advertise";
 
 const Products = () => {
     const products = useLoaderData()
@@ -24,7 +25,7 @@ const Products = () => {
                                 }
                             </div> */}
                             <Swiper
-                                slidesPerView={3}
+                                slidesPerView={1}
                                 spaceBetween={30}
                                 freeMode={true}
                                 pagination={{
@@ -33,11 +34,16 @@ const Products = () => {
                                 modules={[FreeMode, Pagination]}
                                 className="mySwiper"
                             >
-
                                 {
-                                    products.map(product => <SwiperSlide key={product._id}><Product  product={product}></Product></SwiperSlide>)
+                                    products.slice(0, 3).map(product => <SwiperSlide key={product._id}><Advertise product={product}></Advertise></SwiperSlide>)
                                 }
                             </Swiper>
+
+                            <div className="grid grid-cols-3 gap-6">
+                                {
+                                    products.map(product => <Product key={product._id} product={product}></Product>)
+                                }
+                            </div>
                         </div>
                         :
                         <div>

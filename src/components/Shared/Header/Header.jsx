@@ -1,25 +1,30 @@
 import { Link, NavLink } from "react-router-dom";
-import { FaShoppingCart } from 'react-icons/fa'
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Header = () => {
+    const { user } = useContext(AuthContext)
+    const {logOut} = useContext(AuthContext)
 
-    const user = false
+    const handleLogOut = () =>{
+        logOut()
+    }
 
     const links = <>
-        <li><NavLink to='/' style={({isActive}) => {
-            return{
+        <li><NavLink to='/' style={({ isActive }) => {
+            return {
                 backgroundColor: isActive ? "#E1AA74" : "",
                 color: isActive ? "#FFF" : "",
             }
         }}>Home</NavLink></li>
-        <li><NavLink to='/addProduct' style={({isActive}) => {
-            return{
+        <li><NavLink to='/addProduct' style={({ isActive }) => {
+            return {
                 backgroundColor: isActive ? "#E1AA74" : "",
                 color: isActive ? "#FFF" : "",
             }
         }}>Add Product</NavLink></li>
-        <li><NavLink to='/products' style={({isActive}) => {
-            return{
+        <li><NavLink to='/products' style={({ isActive }) => {
+            return {
                 backgroundColor: isActive ? "#E1AA74" : "",
                 color: isActive ? "#FFF" : "",
             }
@@ -29,7 +34,7 @@ const Header = () => {
         <div className="font-noto z-30">
             <div className="flex flex-col md:lg:flex-col lg:flex-row justify-between items-center py-4 px-4 s">
                 <div className="">
-                    <Link className="lg:text-2xl md:text-2xl text-xl font-tavi font-bold text-[#3876BF]">Fuision<span className="text-[#E1AA74]">Electro</span>Hub</Link>
+                    <Link className="lg:text-2xl md:text-2xl text-xl font-tavi font-bold text-[#3876BF]">Fusion<span className="text-[#E1AA74]">Electro</span>Hub</Link>
                 </div>
                 <div className="py-3 lg:py-0 md:py-3">
                     <div className="form-control">
@@ -43,22 +48,41 @@ const Header = () => {
                 </div>
                 <div className="flex items-center space-x-4 ">
                     {
-                        user == true && <button className="btn flex gap-2 items-center rounded-lg capitalize">
-                            <span>My Cart</span><FaShoppingCart></FaShoppingCart>
-                        </button>
-                    }
-                    {
-                        user == true ? <div>
-                            <div className="avatar ">
-                                <div className="w-6 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        user ?
+                            <div className="navbar bg-base-100">
+                                <div className="flex-none">
+                                    <div className="dropdown dropdown-end">
+                                        <label tabIndex={0} className="btn btn-ghost btn-circle">
+                                            <div className="indicator">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                                <span className="badge badge-sm indicator-item">0</span>
+                                            </div>
+                                        </label>
+                                        <div tabIndex={0} className="mt-3 z-[30] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                                            <div className="card-body">
+                                                <span className="font-bold text-lg">0 Items</span>
+                                                <span className="text-info">Subtotal: 0 Tk</span>
+                                                <div className="card-actions">
+                                                    <button className="btn btn-primary btn-block">View cart</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1">
+                                        <a className="btn btn-ghost normal-case text-sm">{user.displayName}</a>
+                                    </div>
+                                    <div className="dropdown dropdown-end">
+                                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                            <div className="w-10 rounded-full">
+                                                <img src={user.photoURL} />
+                                            </div>
+                                        </label>
+                                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                        <Link onClick={handleLogOut}>Log Out</Link>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div>
-                                <h4 className="text-lg font-bold">Name</h4>
-                            </div>
-                        </div>
                             :
                             <Link to='/signIn'><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">SignIn</button></Link>
                     }

@@ -6,7 +6,7 @@ const Root = () => {
     return (
         <div className="font-Montserrat font-noto font-tavi">
             <Header></Header>
-            <div className="max-w-5xl mx-auto">
+            <div className="lg:max-w-5xl md:max-w-5xl max-w-xl mx-auto">
             <Outlet></Outlet>
             </div>
             <Footer></Footer>

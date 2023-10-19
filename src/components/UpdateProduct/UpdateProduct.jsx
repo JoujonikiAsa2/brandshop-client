@@ -1,4 +1,5 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 const UpdateProduct = () => {
 
@@ -22,7 +23,7 @@ const UpdateProduct = () => {
         const UpdateProduct = { image, name, brandName, type, price, shortDescription, rating }
         console.log(UpdateProduct)
 
-        fetch(`https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products/${product._id}`, {
+        fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${product._id}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(UpdateProduct)
@@ -30,7 +31,7 @@ const UpdateProduct = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (data.modifiedCount>0) {
+                if (data.modifiedCount > 0) {
 
                     Swal.fire({
                         icon: 'success',
@@ -45,8 +46,9 @@ const UpdateProduct = () => {
     }
     return (
         <div className="md:max-w-4xl lg:max-w-5xl mx-auto my-4 p-6">
+            <Link to='/' className='pt-6 flex gap-2 justify-center items-center'><BsArrowLeftSquareFill></BsArrowLeftSquareFill>Back</Link>
             <h1 className="text-center text-2xl font-bold py-12">Update Your Product</h1>
-            <form className="space-y-4 font-rancho" onSubmit={handleUpdateProduct}>
+            <form className="space-y-4 font-tavi bg-[#F3F0CA] p-10 rounded-xl" onSubmit={handleUpdateProduct}>
                 <div className="flex lg:flex-row md:flex-col flex-col  gap-4  items-center font-Montserrat">
                     <div className="form-control w-full md:w-1/2 lg:w-1/2">
                         <label className="">
@@ -72,8 +74,8 @@ const UpdateProduct = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Type</span>
                         </label>
-                        <select name="type" defaultValue={product.type} id="" className="input input-bordered text-gray-400" required>
-                            <option value="">Select one type</option>
+                        <select name="type" defaultValue={product.type} id="" className="input input-bordered" required>
+                            <option value="" className=" text-gray-400">Select one type</option>
                             <option value="Mobile">Mobile</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Television">Television</option>

@@ -15,6 +15,7 @@ import Login from './components/Login/Login';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import AuthProvider from './AuthProvider/AuthProvider';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage></HomePage>,
-        loader: () => fetch('https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products')
+        loader: () => fetch('https://fusion-electro-hub-server-side.vercel.app/products')
       },
       {
         path: '/signIn',
@@ -41,17 +42,22 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <PrivateRoute><Products></Products></PrivateRoute>,
-        loader: () => fetch("https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products")
+        loader: () => fetch("https://fusion-electro-hub-server-side.vercel.app/products")
+      },
+      {
+        path: '/details/:id',
+        element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
+        loader: ({params}) => fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${params.id}`)
       },
       {
         path: '/update/:id',
-        element: <UpdateProduct></UpdateProduct>,
-        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products/${params.id}`)
+        element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>,
+        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${params.id}`)
       },
       {
         path: '/products/:brandName',
         element: <Products></Products>,
-        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products/${params.brandName}`)
+        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${params.brandName}`)
       },
     ]
   },

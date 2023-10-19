@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AddProducts = () => {
@@ -20,7 +21,7 @@ const AddProducts = () => {
         const addProduct = { image, name, brandName, type, price, shortDescription, rating }
         console.log(addProduct)
 
-        fetch("https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products", {
+        fetch("https://fusion-electro-hub-server-side.vercel.app/products", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(addProduct)
@@ -43,8 +44,9 @@ const AddProducts = () => {
     }
     return (
         <div className="md:max-w-4xl lg:max-w-5xl mx-auto my-4 p-6">
+            <Link to='/' className='pt-6 flex gap-2 justify-center items-center'><BsArrowLeftSquareFill></BsArrowLeftSquareFill>Back</Link>
             <h1 className="text-center text-2xl font-bold py-12">Add Your Product</h1>
-            <form className="space-y-4 font-rancho" onSubmit={handleAddProduct}>
+            <form className="space-y-4 font-tavi bg-[#F3F0CA] p-10 rounded-xl" onSubmit={handleAddProduct}>
                 <div className="flex lg:flex-row md:flex-col flex-col  gap-4  items-center font-Montserrat">
                     <div className="form-control w-full md:w-1/2 lg:w-1/2">
                         <label className="">
@@ -70,8 +72,8 @@ const AddProducts = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Type</span>
                         </label>
-                        <select name="type" id="" className="input input-bordered text-gray-400" required>
-                            <option value="">Select one type</option>
+                        <select name="type" id="" className="input input-bordered" required>
+                            <option value="" className=" text-gray-400">Select one type</option>
                             <option value="Mobile">Mobile</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Television">Television</option>
@@ -79,6 +81,11 @@ const AddProducts = () => {
                             <option value="Headphone">Headphone</option>
                             <option value="Earphone">Earphone</option>
                             <option value="Cooler">Cooler</option>
+                            <option value="Speaker">Speaker</option>
+                            <option value="Earphone">Earphone</option>
+                            <option value="RAM">RAM</option>
+                            <option value="Keybord">Keybord</option>
+                            <option value="Mouse">Mouse</option>
                         </select>
                     </div>
                 </div>
@@ -93,7 +100,7 @@ const AddProducts = () => {
                         <label className="">
                             <span className="text-lg font-medium font-tavi">Short Description</span>
                         </label>
-                        <textarea placeholder="Bio" name="shortDescription" className="textarea textarea-bordered textarea-lg w-full max-w-lg" ></textarea>
+                        <textarea placeholder="Details" name="shortDescription" className="textarea textarea-bordered textarea-lg w-full max-w-lg" ></textarea>
                     </div>
                 </div>
                 <div className="flex flex-col  gap-4 items-center font-Montserrat">

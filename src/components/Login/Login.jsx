@@ -14,7 +14,7 @@ const Login = () => {
     const googleProvider = new GoogleAuthProvider()
     const navigate = useNavigate()
     const handleLogin = (e) => {
-       
+
         e.preventDefault()
         const form = e.target
         const email = form.email.value
@@ -25,22 +25,52 @@ const Login = () => {
         signIn(email, password)
             .then(res => {
                 console.log(res.user)
-                Swal.fire('Login Successfully!')
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                  })
                 navigate(location?.state ? location.state : '/')
             }
             )
             .catch(error => console.log(error.message))
-        
+
     }
-    const handleGoogleSignIn = ()=>{
-        signInWithPopup(auth,googleProvider)
-        .then(res => {
-            console.log(res.user)
-            Swal.fire('Login Successfully!')
-            navigate(location?.state ? location.state : '/')
-        }
-        )
-        .catch(error => console.log(error.message))
+    const handleGoogleSignIn = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(res => {
+                console.log(res.user)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                })
+                navigate(location?.state ? location.state : '/')
+            }
+            )
+            .catch(error => console.log(error.message))
     }
     return (
         <div className='md:max-w-4xl lg:max-w-5xl mx-auto shadow-lg m-5 lg:m-20 md:m-16'> <h1 className="text-center text-2xl font-bold pt-8 text-[#3876BF]">SignIn</h1>

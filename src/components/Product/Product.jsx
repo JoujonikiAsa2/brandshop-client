@@ -4,8 +4,9 @@ import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-const Product = ({ product, productRat, setProductRat }) => {
+const Product = ({ product, productRat, setProductRat,newProducts,setNewProducts }) => {
     const { image, name, brandName, type, price, rating } = product
+
     const handleDelete = (id) => {
         console.log(id)
 
@@ -19,7 +20,7 @@ const Product = ({ product, productRat, setProductRat }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://fusion-electro-hub-server-side-2zf0lc9jf.vercel.app/products/${id}`, {
+                fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -31,16 +32,16 @@ const Product = ({ product, productRat, setProductRat }) => {
                                 'Your coffee has been deleted.',
                                 'success'
                             )
-                            // const remaining = coffees.filter(cof => cof._id !== id);
-                            // setCoffees(remaining)
+                            const remaining = newProducts.filter(pro => pro._id !== id);
+                            setNewProducts(remaining)
                         }
                     })
             }
         })
     }
     return (
-        <div className="card shadow-xl hover:shadow-black border space-y-4 p-4">
-            <img src={image} alt="" />
+        <div className="card shadow-xl bg-[#F3F0CA] hover:shadow-black border space-y-4 p-4">
+            <img src={image} alt="" className='w-96 lg:w-full md:w-full h-96 lg:h-full md:h-full'/>
             <h4 className='card-title'>{name}</h4>
             <div className='capitalize'>
                 <p><span className='text-lg font-semibold'>Brand: &nbsp;</span> {brandName}</p>
@@ -65,7 +66,7 @@ const Product = ({ product, productRat, setProductRat }) => {
                 </p>
             </div>
             <div className='flex flex-row gap-2'>
-                <button className='btn btn-sm capitalize bg-green-400 flex justify-center items-center'><BsFillInfoCircleFill></BsFillInfoCircleFill> Details</button>
+                <Link to={`/details/${product._id}`} className='flex'> <button className='btn btn-sm capitalize bg-green-400 flex justify-center items-center'><BsFillInfoCircleFill></BsFillInfoCircleFill> Details</button></Link>
                 <Link to={`/update/${product._id}`} className='flex'><button className='btn btn-sm capitalize bg-yellow-400 flex justify-center items-center'><AiFillEdit></AiFillEdit> Update</button></Link>
                 <button className='btn btn-sm capitalize bg-red-400 flex justify-center items-center' onClick={() => handleDelete(product._id)}><RiDeleteBin2Fill></RiDeleteBin2Fill> Delete</button>
             </div>
@@ -75,8 +76,10 @@ const Product = ({ product, productRat, setProductRat }) => {
 
 Product.propTypes = {
     product: PropTypes.object,
+    newProducts: PropTypes.object,
     productRat: PropTypes.number,
-    setProductRat: PropTypes.func
+    setProductRat: PropTypes.func,
+    setNewProducts: PropTypes.func
 }
 
 export default Product;

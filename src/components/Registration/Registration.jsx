@@ -23,7 +23,22 @@ const Registration = () => {
         createUser(email,password)
         .then(res => {
             console.log(res.user)
-            Swal.fire('Registration Successfull!')
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: 'Registration successfull'
+              })
             navigate('/signIn')
             updateProfile(res.user,{
                 displayName: name,

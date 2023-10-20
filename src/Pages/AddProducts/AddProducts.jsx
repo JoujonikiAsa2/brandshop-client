@@ -21,7 +21,7 @@ const AddProducts = () => {
         const addProduct = { image, name, brandName, type, price, shortDescription, rating }
         console.log(addProduct)
 
-        fetch("https://fusion-electro-hub-server-side.vercel.app/products", {
+        fetch("http://localhost:5000/products", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(addProduct)

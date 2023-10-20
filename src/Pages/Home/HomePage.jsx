@@ -30,7 +30,7 @@ const HomePage = () => {
     }
 
     useEffect(() => {
-        fetch('https://fusion-electro-hub-server-side.vercel.app/categories')
+        fetch('http://localhost:5000/categories')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])

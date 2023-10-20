@@ -20,7 +20,7 @@ const Product = ({ product, productRat, setProductRat,newProducts,setNewProducts
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${id}`, {
+                fetch(`http://localhost:5000/products/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -40,14 +40,14 @@ const Product = ({ product, productRat, setProductRat,newProducts,setNewProducts
         })
     }
     return (
-        <div className="card shadow-xl bg-[#F3F0CA] hover:shadow-black border space-y-4 p-4">
-            <img src={image} alt="" className='w-96 lg:w-full md:w-full h-96 lg:h-full md:h-full'/>
-            <h4 className='card-title'>{name}</h4>
+        <div className="card shadow-xl text-[#3876BF] bg-[#F3F0CA] hover:shadow-black border space-y-4 p-4">
+            <img src={image} alt="" className='w-80 lg:w-60 md:w-full h-80 lg:h-60 md:h-60'/>
+            <h4 className='text-lg font-bold'>{name}</h4>
             <div className='capitalize'>
-                <p><span className='text-lg font-semibold'>Brand: &nbsp;</span> {brandName}</p>
-                <p><span className='text-lg font-semibold'>Type: &nbsp;</span> {type}</p>
-                <p><span className='text-lg font-semibold'>Price: &nbsp;</span> {price} Tk</p>
-                <p className='text-sm'><span className='text-lg font-semibold'>Rating: &nbsp;</span>
+                <p><span className='text-sm font-bold'>Brand: &nbsp;</span> {brandName}</p>
+                <p><span className='text-sm font-bold'>Type: &nbsp;</span> {type}</p>
+                <p><span className='text-sm font-bold'>Price: &nbsp;</span> {price} Tk</p>
+                <p className='text-sm'><span className='text-sm font-bold'>Rating: &nbsp;</span>
                     {
                         rating && <div className="rating rating-sm rating-half">
                             <input type="radio" name={productRat && setProductRat(productRat + 1)} className="rating-hidden" />
@@ -65,10 +65,10 @@ const Product = ({ product, productRat, setProductRat,newProducts,setNewProducts
                     }
                 </p>
             </div>
-            <div className='flex flex-row gap-2'>
-                <Link to={`/details/${product._id}`} className='flex'> <button className='btn btn-sm capitalize bg-green-400 flex justify-center items-center'><BsFillInfoCircleFill></BsFillInfoCircleFill> Details</button></Link>
-                <Link to={`/update/${product._id}`} className='flex'><button className='btn btn-sm capitalize bg-yellow-400 flex justify-center items-center'><AiFillEdit></AiFillEdit> Update</button></Link>
-                <button className='btn btn-sm capitalize bg-red-400 flex justify-center items-center' onClick={() => handleDelete(product._id)}><RiDeleteBin2Fill></RiDeleteBin2Fill> Delete</button>
+            <div className='flex flex-row gap-2 text-[#FFF]text-[#FFF]'>
+                <Link to={`/details/${product._id}`} className='flex'> <button className='btn btn-sm capitalize bg-green-400 flex justify-center items-center text-[#FFF]'><BsFillInfoCircleFill></BsFillInfoCircleFill> Details</button></Link>
+                <Link to={`/update/${product._id}`} className='flex'><button className='btn btn-sm capitalize bg-yellow-400 flex justify-center items-center text-[#FFF]'><AiFillEdit></AiFillEdit> Update</button></Link>
+                <button className='btn btn-sm capitalize bg-red-400 flex justify-center items-center text-[#FFF]' onClick={() => handleDelete(product._id)}><RiDeleteBin2Fill></RiDeleteBin2Fill> Delete</button>
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaGoogle } from 'react-icons/fa'
 import signInPhoto from '../../assets/photos/Athentication/1.jpg'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -13,6 +13,7 @@ const Login = () => {
     const { signIn } = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
     const navigate = useNavigate()
+    const [error, setError] = useState()
     const handleLogin = (e) => {
 
         e.preventDefault()
@@ -32,19 +33,19 @@ const Login = () => {
                     timer: 1000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
-                  })
-                  
-                  Toast.fire({
+                })
+
+                Toast.fire({
                     icon: 'success',
                     title: 'Signed in successfully'
-                  })
+                })
                 navigate(location?.state ? location.state : '/')
             }
             )
-            .catch(error => console.log(error.message))
+            .catch(error => setError(error.message))
 
     }
     const handleGoogleSignIn = () => {
@@ -74,7 +75,7 @@ const Login = () => {
     }
     return (
         <div className='md:max-w-4xl lg:max-w-5xl mx-auto shadow-lg m-5 lg:m-20 md:m-16'> <h1 className="text-center text-2xl font-bold pt-8 text-[#3876BF]">SignIn</h1>
-            <div className=" flex flex-col-reverse md:flex-row-reverse lg:flex-row justify-center items-center">
+            <div className=" flex flex-col-reverse md:flex-row-reverse lg:flex-row justify-center items-center gap-3">
                 <div>
                     <form className="space-y-4 pt-4" onSubmit={handleLogin}>
                         <div className="flex-col  gap-4  items-center font-Montserrat">
@@ -88,8 +89,11 @@ const Login = () => {
                                 <label className="">
                                     <span className="text-lg font-medium font-tavi"><RiLockPasswordFill></RiLockPasswordFill></span>
                                 </label>
-                                <input type="text" name="password" placeholder="Password" className=" p-1 text-sm" required />
+                                <input type="password" name="password" placeholder="Password" className=" p-1 text-sm" required />
                             </div>
+                            {
+                                error && <p className='text-xs text-red-500'>{error.slice(17,47)}</p>
+                            }
                             <div className="flex items-center gap-3 pt-5">
                                 <input type="checkbox" className=" p-1 text-sm" required />
                                 <label className="">
@@ -109,7 +113,7 @@ const Login = () => {
                         <p className="font-bold">Or</p>
                     </div>
                     <div className='pb-6 flex flex-col justify-center items-center text-lg font-bold text-[#3876BF]'>
-                        <soan className="pb-2">Sign up with </soan>
+                        <span className="pb-2">SignIn with </span>
                         <button className='flex flex-row items-center gap-2 btn capitalize' onClick={handleGoogleSignIn}><span className='text-xl text-[#3876BF] font-bold'></span>
                             <FaGoogle className='text-yellow-600 text-xl'></FaGoogle>Google</button>
                     </div>

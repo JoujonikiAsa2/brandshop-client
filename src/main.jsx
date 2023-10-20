@@ -16,6 +16,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import AuthProvider from './AuthProvider/AuthProvider';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 import ProductDetails from './components/ProductDetails/ProductDetails';
+import CartDetails from './components/CartDetails/CartDetails';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage></HomePage>,
-        loader: () => fetch('https://fusion-electro-hub-server-side.vercel.app/products')
+        loader: () => fetch('http://localhost:5000/products')
       },
       {
         path: '/signIn',
@@ -42,22 +43,27 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <PrivateRoute><Products></Products></PrivateRoute>,
-        loader: () => fetch("https://fusion-electro-hub-server-side.vercel.app/products")
+        loader: () => fetch("http://localhost:5000/products")
       },
       {
         path: '/details/:id',
         element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+      },
+      {
+        path: '/cartDetails',
+        element: <PrivateRoute><CartDetails></CartDetails></PrivateRoute>,
+        loader: () => fetch(`http://localhost:5000/carts`)
       },
       {
         path: '/update/:id',
         element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
       },
       {
-        path: '/products/:brandName',
+        path: '/products/brand/:brandName',
         element: <Products></Products>,
-        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side.vercel.app/products/${params.brandName}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/products/brand/${params.brandName}`)
       },
     ]
   },

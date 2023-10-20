@@ -9,7 +9,7 @@ const ErrorPage = () => {
             <div>
                 <img src={errorImage} alt="" className="h-48" />
             </div>
-            <h2 className="text-lg lg:text-xl md:text-xl text-red-400 font-bold text-center">Something went wrong! Please go back to the Home Page</h2>
+            <h2 className="text-lg lg:text-xl md:text-xl w-96 text-red-400 font-bold text-center">Something went wrong! Please go back to the Home Page</h2>
         </div>
     );
 };

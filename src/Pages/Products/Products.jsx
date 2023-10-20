@@ -18,12 +18,6 @@ const Products = () => {
                     products.length > 0
                         ?
                         <div className="my-20">
-                            {/* <h2 className="text-center text-3xl font-bold text-[#3876BF] py-12">Products</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-4">
-                                {
-                                    products.map(product => <Product key={product._id} product={product}></Product>)
-                                }
-                            </div> */}
                             <Swiper
                                 slidesPerView={1}
                                 spaceBetween={30}
@@ -35,11 +29,11 @@ const Products = () => {
                                 className="mySwiper"
                             >
                                 {
-                                    products.slice(0, 3).map(product => <SwiperSlide key={product._id}><Advertise product={product}></Advertise></SwiperSlide>)
+                                    products.slice(0, 3).map(product => <SwiperSlide className="bg-[#F3F0CA]" key={product._id}><Advertise product={product}></Advertise></SwiperSlide>)
                                 }
                             </Swiper>
 
-                            <div className="grid grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
                                 {
                                     products.map(product => <Product key={product._id} product={product}></Product>)
                                 }

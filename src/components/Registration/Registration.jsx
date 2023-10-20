@@ -3,7 +3,7 @@ import { AiTwotoneMail } from 'react-icons/ai'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import signUp from '../../assets/photos/Athentication/2.jpg'
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { updateProfile } from 'firebase/auth';
@@ -11,6 +11,7 @@ import { updateProfile } from 'firebase/auth';
 const Registration = () => {
     const navigate = useNavigate()
     const { createUser } = useContext(AuthContext)
+    const [error, setError] = useState()
     const handleSignUp = (e) => {
         e.preventDefault()
         const form = e.target
@@ -18,6 +19,21 @@ const Registration = () => {
         const name = form.name.value
         const email = form.email.value
         const password = form.password.value
+
+        var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+        if (password.length < 6) {
+            setError("Password should be at 6 characters or longer")
+            return
+        }
+        else if (!/[A-Z]/.test(password)) {
+            setError('Don not have one uppercase character')
+            return;
+        }
+        else if (!format.test(password)) {
+            setError("Do not have special charater")
+            return;
+        }
 
         console.log(image, name, email, password)
         createUser(email,password)
@@ -50,7 +66,7 @@ const Registration = () => {
     }
     return (
         <div className='md:max-w-4xl lg:max-w-5xl mx-auto shadow-lg m-5 lg:m-20 md:m-16'> <h1 className="text-center text-2xl font-bold pt-8 text-[#3876BF]">SignUp</h1>
-            <div className=" flex flex-col-reverse md:flex-row-reverse lg:flex-row-reverse justify-center items-center">
+            <div className=" flex flex-col-reverse md:flex-row-reverse lg:flex-row-reverse justify-center items-center gap-4">
                 <form className="space-y-4 py-4" onSubmit={handleSignUp}>
                     <div className="flex-col  gap-4  items-center font-Montserrat">
                         <div className="flex items-center gap-6 w-full border-b-2">
@@ -69,14 +85,17 @@ const Registration = () => {
                             <label className="">
                                 <span className="text-lg font-medium font-tavi"><AiTwotoneMail></AiTwotoneMail></span>
                             </label>
-                            <input type="text" name="email" placeholder="Your email address" className=" p-1 text-sm" required />
+                            <input type="email" name="email" placeholder="Your email address" className=" p-1 text-sm" required />
                         </div>
                         <div className="flex items-center gap-6 w-full border-b-2">
                             <label className="">
                                 <span className="text-lg font-medium font-tavi"><RiLockPasswordFill></RiLockPasswordFill></span>
                             </label>
-                            <input type="text" name="password" placeholder="Password" className=" p-1 text-sm" required />
+                            <input type="password" name="password" placeholder="Password" className=" p-1 text-sm" required />
                         </div>
+                        {
+                            error && <p className='text-xs text-red-500'>{error}</p>
+                        }
                         <div className="flex items-center gap-3 pt-5">
                             <input type="checkbox" className=" p-1 text-sm" required />
                             <label className="">

@@ -111,7 +111,7 @@ const Header = () => {
                 </div>
                 <div className="flex items-center space-x-4 ">
 
-                    <div className="navbar bg-base-100 flex flex-row-reverse">
+                    <div className="navbar bg-base-100 flex flex-row-reverse gap-5">
                         <div className="flex-none">
 
                             <div className="dropdown dropdown-start">

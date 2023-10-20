@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 // import Product from "../../components/Product/Product";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -6,14 +6,25 @@ import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 import Product from "../../components/Product/Product";
 import Advertise from "../../components/Advertise/Advertise";
+import { IoArrowBackSharp } from "react-icons/io5";
+import { useState } from "react";
 
 const Products = () => {
     const products = useLoaderData()
     const id = useParams()
+
+    const [showAll, setShowAll] = useState(3)
     console.log(id)
+
+    const handleShowAll = () => {
+        setShowAll(products.length)
+    }
     return (
         <div>
             <div>
+                <Link to='/' className='flex justify-start items-center mt-5 gap-4 text-lg font-bold'>
+                    <IoArrowBackSharp className='text-xl font-bold'></IoArrowBackSharp><span>Go back home</span>
+                </Link>
                 {
                     products.length > 0
                         ?
@@ -31,13 +42,21 @@ const Products = () => {
                                 {
                                     products.slice(0, 3).map(product => <SwiperSlide className="bg-[#F3F0CA]" key={product._id}><Advertise product={product}></Advertise></SwiperSlide>)
                                 }
+
                             </Swiper>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
                                 {
-                                    products.map(product => <Product key={product._id} product={product}></Product>)
+                                    products.slice(0, showAll).map(product => <Product key={product._id} product={product}></Product>)
                                 }
                             </div>
+                            {
+                                showAll != products.length &&
+
+                                <div className="flex justify-center items-center py-8">
+                                    <button className="btn text-[#FFF] bg-[#3876BF] hover:bg-transparent hover:text-[#3876BF]" onClick={handleShowAll}>See more</button>
+                                </div>
+                            }
                         </div>
                         :
                         <div>
@@ -45,7 +64,6 @@ const Products = () => {
                                 <h2 className="flex justify-center items-center text-3xl font-bold text-[#3876BF] py-12 h-[20rem]">No Product found</h2>
                             </div>
                         </div>
-
                 }
             </div>
         </div>

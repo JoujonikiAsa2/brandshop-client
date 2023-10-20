@@ -17,5 +17,6 @@ This project creates a smooth online shopping experience.
 - Feed Back
 
 # The Live Link of the project
-["https://fusionelectrohub.web.app/"]
+
+"https://fusionelectrohub.web.app/
 

@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/cartDetails',
-        element: <CartDetails></CartDetails>,
+        element: <PrivateRoute><CartDetails></CartDetails></PrivateRoute>,
         loader: () => fetch(`https://fusion-electro-hub-server-side-qou1w1gc1.vercel.app/carts`)
       },
       {

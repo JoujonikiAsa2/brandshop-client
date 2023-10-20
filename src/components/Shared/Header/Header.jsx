@@ -5,7 +5,7 @@ import logo from '../../../assets/photos/Logo/virtual.png'
 import Swal from "sweetalert2";
 
 const Header = () => {
-    
+
     const links = <>
         <li><NavLink to='/' style={({ isActive }) => {
             return {
@@ -110,31 +110,33 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="flex items-center space-x-4 ">
-                    {
-                        user ?
-                            <div className="navbar bg-base-100 flex flex-row-reverse">
-                                <div className="flex-none">
-                                    <div className="dropdown dropdown-start">
-                                        <label tabIndex={0} className="btn btn-ghost btn-circle">
-                                            <div className="indicator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                                                <span className="badge badge-sm indicator-item">{carts.length}</span>
-                                            </div>
-                                        </label>
-                                        <div tabIndex={0} className="mt-3 z-[30] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                                            <div className="card-body">
-                                                <span className="font-bold text-lg">{carts.length} Items</span>
-                                                {
-                                                    carts.map(cart => <div className="flex justify-between items-center gap-3" key={cart._id}><p>{cart.name}</p><span className="hover:cursor-pointer w-4 h-4 text-center text-white bg-red-400" onClick={() => handleDelete(cart._id)} >X</span></div>)
-                                                }
-                                                <div className="card-actions">
-                                                    <Link to='/cartDetails'>
-                                                        <button className="btn btn-sm btn-block capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">View cart</button>
-                                                    </Link>
-                                                </div>
-                                            </div>
+
+                    <div className="navbar bg-base-100 flex flex-row-reverse">
+                        <div className="flex-none">
+
+                            <div className="dropdown dropdown-start">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle">
+                                    <div className="indicator">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                        <span className="badge badge-sm indicator-item">{carts.length}</span>
+                                    </div>
+                                </label>
+                                <div tabIndex={0} className="mt-3 z-[30] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                                    <div className="card-body">
+                                        <span className="font-bold text-lg">{carts.length} Items</span>
+                                        {
+                                            carts.map(cart => <div className="flex justify-between items-center gap-3" key={cart._id}><p>{cart.name}</p><span className="hover:cursor-pointer w-4 h-4 text-center text-white bg-red-400" onClick={() => handleDelete(cart._id)} >X</span></div>)
+                                        }
+                                        <div className="card-actions">
+                                            <Link to='/cartDetails'>
+                                                <button className="btn btn-sm btn-block capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">View cart</button>
+                                            </Link>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            {user ?
+                                <div className="flex justify-center items-center">
                                     <div className="flex-1">
                                         <a className="btn btn-ghost normal-case text-sm">{user.displayName}</a>
                                     </div>
@@ -143,12 +145,14 @@ const Header = () => {
                                             <img src={user.photoURL} />
                                         </div>
                                     </label>
+
                                     <Link className="btn btn-sm capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]" onClick={handleLogOut}>Log Out</Link>
                                 </div>
-                            </div>
-                            :
-                            <Link to='/signIn'><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">SignIn</button></Link>
-                    }
+                                :
+                                <Link to='/signIn'><button className="btn h-4 rounded-lg capitalize bg-[#E1AA74] text-md text-[#FFF] hover:bg-transparent hover:text-[#E1AA74]">SignIn</button></Link>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="navbar bg-[#3876BF] text-[#58573c] text-md">

@@ -57,7 +57,7 @@ const Header = () => {
             .catch(error => console.log(error.message))
     }
 
-    fetch('https://fusion-electro-hub-server-side-qou1w1gc1.vercel.app/carts')
+    fetch('https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts')
         .then(res => res.json())
         .then(data => setCart(data))
 
@@ -76,7 +76,7 @@ const Header = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://fusion-electro-hub-server-side-qou1w1gc1.vercel.app/carts/${id}`, {
+                fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

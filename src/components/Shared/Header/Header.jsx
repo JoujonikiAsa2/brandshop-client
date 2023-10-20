@@ -57,7 +57,7 @@ const Header = () => {
             .catch(error => console.log(error.message))
     }
 
-    fetch('http://localhost:5000/carts')
+    fetch('https://fusion-electro-hub-server-side-qou1w1gc1.vercel.app/carts')
         .then(res => res.json())
         .then(data => setCart(data))
 
@@ -76,7 +76,7 @@ const Header = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/carts/${id}`, {
+                fetch(`https://fusion-electro-hub-server-side-qou1w1gc1.vercel.app/carts/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

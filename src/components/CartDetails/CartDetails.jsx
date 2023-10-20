@@ -26,7 +26,7 @@ const CartDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch('http://localhost:5000/carts', {
+                fetch('https://fusion-electro-hub-server-side-qou1w1gc1.vercel.app/carts', {
                     method: "DELETE"
                 })
                     .then(res => console.log(res.json))

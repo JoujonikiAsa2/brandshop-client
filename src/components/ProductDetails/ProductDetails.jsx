@@ -14,7 +14,7 @@ const ProductDetails = () => {
 
     // const intPrice = parseInt(price)
     const handleCart = () => {
-        fetch('https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts', {
+        fetch('http://localhost:5000/carts', {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(cartProduct)

@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import logo from '../../../assets/photos/Logo/virtual.png'
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Header = () => {
 
@@ -57,9 +58,13 @@ const Header = () => {
             .catch(error => console.log(error.message))
     }
 
-    fetch('https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts')
-        .then(res => res.json())
-        .then(data => setCart(data))
+    axios.get('http://localhost:5000/carts',{withCredentials: true})
+    // fetch('http://localhost:5000/carts',{
+    //     method: "GET",
+    //     credentials: "include"
+    // })
+    //     .then(res => res.json())
+        .then(data => setCart(data.data))
 
     // console.log(carts.length)
 
@@ -76,7 +81,7 @@ const Header = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts/${id}`, {
+                fetch(`http://localhost:5000/carts/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

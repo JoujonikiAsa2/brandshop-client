@@ -2,12 +2,18 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const CartDetails = () => {
     const navigate = useNavigate()
 
     const [total, setTotal] = useState([])
-    const carts = useLoaderData()
+    const [carts, setCarts] = useState([])
+
+    const url = 'http://localhost:5000/carts'
+
+    axios.get(url, { withCredentials: true })
+        .then(data => setCarts(data.data))
 
     useEffect(() => {
         const totalPrice = carts.reduce((acc, cart) => acc + parseInt(cart.price), 0);
@@ -26,7 +32,7 @@ const CartDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch('https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts', {
+                fetch('http://localhost:5000/cartshttp://localhost:5000/carts', {
                     method: "DELETE"
                 })
                     .then(res => console.log(res.json))
@@ -42,8 +48,8 @@ const CartDetails = () => {
                             navigate('/')
                         }
                     })
-                }
-            })
+            }
+        })
     }
     return (
         <div className="flex lg:flex-row md:flex-row flex-col gap-8 justify-center items-start relative">

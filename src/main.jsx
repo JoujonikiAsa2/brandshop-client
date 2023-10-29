@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage></HomePage>,
-        loader: () => fetch('https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/products')
+        loader: () => fetch('http://localhost:5000/products')
       },
       {
         path: '/signIn',
@@ -43,27 +43,27 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <PrivateRoute><Products></Products></PrivateRoute>,
-        loader: () => fetch("https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/products")
+        loader: () => fetch("http://localhost:5000/products")
       },
       {
         path: '/details/:id',
         element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/products/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
       },
       {
         path: '/cartDetails',
         element: <PrivateRoute><CartDetails></CartDetails></PrivateRoute>,
-        loader: () => fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/carts`)
+        loader: () => fetch(`http://localhost:5000/carts`)
       },
       {
         path: '/update/:id',
         element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/products/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
       },
       {
         path: '/products/brand/:brandName',
         element: <Products></Products>,
-        loader: ({ params }) => fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/products/brand/${params.brandName}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/products/brand/${params.brandName}`)
       },
     ]
   },

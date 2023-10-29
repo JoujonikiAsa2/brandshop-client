@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import auth from "../../../firebase.config";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const Login = () => {
 
     const { signIn } = useContext(AuthContext)
@@ -25,7 +26,19 @@ const Login = () => {
 
         signIn(email, password)
             .then(res => {
-                console.log(res.user)
+                const loggedUser = res.user
+                const user = { email }
+                console.log(loggedUser)
+
+                const url = 'http://localhost:5000/jwt'
+                axios.post(url, user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.success) {
+                            navigate(location?.state ? location.state : '/')
+                        }
+                    })
+
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -42,7 +55,7 @@ const Login = () => {
                     icon: 'success',
                     title: 'Signed in successfully'
                 })
-                navigate(location?.state ? location.state : '/')
+
             }
             )
             .catch(error => setError(error.message))
@@ -92,7 +105,7 @@ const Login = () => {
                                 <input type="password" name="password" placeholder="Password" className=" p-1 text-sm" required />
                             </div>
                             {
-                                error && <p className='text-xs text-red-500'>{error.slice(17,47)}</p>
+                                error && <p className='text-xs text-red-500'>{error.slice(17, 47)}</p>
                             }
                             <div className="flex items-center gap-3 pt-5">
                                 <input type="checkbox" className=" p-1 text-sm" required />

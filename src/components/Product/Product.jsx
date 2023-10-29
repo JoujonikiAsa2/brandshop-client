@@ -20,7 +20,7 @@ const Product = ({ product, productRat, setProductRat,newProducts,setNewProducts
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://fusion-electro-hub-server-side-9ehl8bk2t.vercel.app/products/${id}`, {
+                fetch(`http://localhost:5000/products/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
